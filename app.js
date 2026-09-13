@@ -1,5 +1,5 @@
 async function loadRows() {
-  const res = await fetch('https://raw.githubusercontent.com/GavnPro/Chiphisaubanhang/main/data.json');
+  const res = await fetch('./data.json');
   if (!res.ok) throw new Error('HTTP ' + res.status);
   return res.json();
 }
