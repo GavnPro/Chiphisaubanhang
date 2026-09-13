@@ -1,8 +1,16 @@
 async function loadRows() {
-  const res = await fetch('./data.json');
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  return res.json();
+  const urls = ['./data.json', 'https://raw.githubusercontent.com/GavnPro/Chiphisaubanhang/main/data.json'];
+  let lastErr;
+  for (const url of urls) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' @ ' + url);
+      return await res.json();
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr;
 }
+
 
 loadRows().then((ROWS) => {
 
